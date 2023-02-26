@@ -1,0 +1,15 @@
+#!/bin/bash
+apt-get install -y chrony
+export ntp0='server 0.cn.pool.ntp.org iburst'
+export ntp1='server 1.cn.pool.ntp.org iburst'
+
+server='server 0.cn'
+chrony_conf='/etc/chrony/chrony.conf'
+ntp_server=$(grep "$server" "$chrony_conf")
+
+if [ -z "$ntp_server" ]; then
+    sed -i 's/^pool/#&/' /etc/chrony/chrony.conf
+    sed -i "/^#pool 2/a\ \n$ntp0 \n$ntp1" /etc/chrony/chrony.conf
+fi
+
+sleep 5

@@ -1,0 +1,7 @@
+- name: Copy helm to master
+  copy:
+    src: /deployment/packages/helm
+    dest: /usr/local/bin
+
+- name: Change permission of helm
+  command: "chmod +x /usr/local/bin/helm"

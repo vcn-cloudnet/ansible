@@ -1,0 +1,2 @@
+- name: Generate kubernetes cluster init config
+  template: src=01-cluster-init.yaml.j2 dest=/root/cluster-init.yaml

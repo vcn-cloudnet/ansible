@@ -1,0 +1,105 @@
+- name: Make directory for k8s installation
+  command: "mkdir -p /tmp/k8s/"
+
+- name: Create /tmp/k8s/00-swapoff.sh
+  template: src=00-swapoff.sh.j2 dest=/tmp/k8s/00-swapoff.sh mode=755
+
+- name: Shutoff swap and disable
+  shell: "sh /tmp/k8s/00-swapoff.sh"
+
+#- name: Remove 00-swapoff.sh
+#  file:
+#    path: /tmp/k8s/00-swapoff.sh
+#    state: absent
+
+- name: Create /tmp/k8s/01-sources.list.sh
+  template: src=01-sources.list.sh.j2 dest=/tmp/k8s/01-sources.list.sh mode=755
+
+- name: Create /etc/apt/sources.list
+  shell: "sh /tmp/k8s/01-sources.list.sh"
+
+#- name: Remove 01-sources.list.sh
+#  file:
+#    path: /tmp/k8s/01-sources.list.sh
+#    state: absent
+
+- name: Create /tmp/k8s/02-basis.packages.sh
+  template: src=02-basis.packages.sh.j2 dest=/tmp/k8s/02-basis.packages.sh mode=755
+
+- name: Install basis packages
+  shell: "sh /tmp/k8s/02-basis.packages.sh"
+
+#- name: Remove 02-basis.packages.sh
+#  file:
+#    path: /tmp/k8s/02-basis.packages.sh
+#    state: absent
+
+- name: Create /tmp/k8s/03-chrony.sh
+  template: src=03-chrony.sh.j2 dest=/tmp/k8s/03-chrony.sh mode=755
+
+- name: Install NTP chrony
+  shell: "sh /tmp/k8s/03-chrony.sh"
+
+#- name: Remove 03-chrony.sh
+#  file:
+#    path: /tmp/k8s/03-chrony.sh
+#    state: absent
+
+- name: Create /tmp/k8s/04-modules.sh
+  template: src=04-modules.sh.j2 dest=/tmp/k8s/04-modules.sh mode=755
+
+- name: Create modules
+  shell: "sh /tmp/k8s/04-modules.sh"
+
+#- name: Remove 04-modules.sh
+#  file:
+#    path: /tmp/k8s/04-modules.sh
+#    state: absent
+
+- name: Create /tmp/k8s/05-k8s.sysctl.sh
+  template: src=05-k8s.sysctl.sh.j2 dest=/tmp/k8s/05-k8s.sysctl.sh mode=755
+
+- name: Create k8s.sysctl
+  shell: "sh /tmp/k8s/05-k8s.sysctl.sh"
+
+#- name: Remove 05-k8s.sysctl.sh
+#  file:
+#    path: /tmp/k8s/05-k8s.sysctl.sh
+#    state: absent
+
+- name: Create /tmp/k8s/06-containerd.sh
+  template: src=06-containerd.sh.j2 dest=/tmp/k8s/06-containerd.sh mode=755
+
+- name: Add docker repository & install containerd.io
+  shell: "sh /tmp/k8s/06-containerd.sh"
+
+#- name: Remove 06-containerd.sh
+#  file:
+#    path: /tmp/k8s/06-containerd.sh
+#    state: absent
+
+- name: Create 07-crictl.yml
+  template: src=07-crictl.yaml.j2 dest=/etc/crictl.yaml
+
+- name: Make dir for containerd
+  command: mkdir -p /etc/containerd
+
+- name: Create containerd.config.toml
+  template: src=08-config.toml.j2 dest=/etc/containerd/config.toml
+
+- name: Reload daemon-reload
+  command: systemctl daemon-reload
+
+- name: Restart containerd
+  command: systemctl restart containerd
+
+- name: Enable containerd
+  command: systemctl enable containerd
+
+- name: 
+  shell: |
+    apt update && apt install -y kubeadm={{ kubeadm_ver }} kubectl={{ kubectl_ver }} kubelet={{ kubelet_ver }}
+
+    apt-mark hold kubeadm kubectl kubelet
+
+    kubeadm config images pull --cri-socket /run/containerd/containerd.sock --kubernetes-version {{ k8s_version }} --image-repository registry.aliyuncs.com/google_containers

@@ -1,0 +1,4 @@
+- name: Reset kubernetes cluster
+  command: kubeadm reset -f
+  notify: "clear k8s cluster"
+- meta: flush_handlers

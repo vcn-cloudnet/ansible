@@ -1,0 +1,12 @@
+imagesRegistry_FQDN: $imagesRegistry_FQDN
+domain_Suffix: $domain_Suffix
+master1_IP: $master1_IP
+master1_hostName: $master1_hostName
+master1_FQDN: $master1_FQDN
+cluster_Name: $cluster_Name
+serviceSubnet: $serviceSubnet
+podSubnet: $podSubnet
+k8s_version: $k8s_version
+kubeadm_ver: $kubeadm_ver
+kubectl_ver: $kubectl_ver
+kubelet_ver: $kubelet_ver

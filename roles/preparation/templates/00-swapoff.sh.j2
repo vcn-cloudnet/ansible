@@ -1,0 +1,13 @@
+#!/bin/bash
+while read -r line
+do
+    swap=$(echo $line | awk '{print $3}')
+
+    if [ "$swap" == swap  ];then
+        if [[ $line != \#* ]];then
+            sed -i '/swap/ s/^/#/' /etc/fstab
+        fi
+    fi
+done < /etc/fstab
+
+sleep 3

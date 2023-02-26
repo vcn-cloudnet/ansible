@@ -1,0 +1,2 @@
+- name: Reset kubernetes cluster
+  command: kubeadm init --config=/root/cluster-init.yaml --skip-phases=addon/kube-proxy
