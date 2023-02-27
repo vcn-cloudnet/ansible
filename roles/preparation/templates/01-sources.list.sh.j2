@@ -10,33 +10,29 @@ fi
 if [ -f "/etc/apt/sources.list.origin" ]; then
     rm /etc/apt/sources.list
     cat <<EOF | tee /etc/apt/sources.list
-deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb https://mirrors.aliyun.com/debian/ bullseye main non-free contrib
+deb https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
+deb https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
+deb https://mirrors.aliyun.com/debian-security/ bullseye-security main
 
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/debian/ bullseye main non-free contrib
+deb-src https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
+deb-src https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
+deb-src https://mirrors.aliyun.com/debian-security/ bullseye-security main
 
 EOF
 else
     mv /etc/apt/sources.list /etc/apt/sources.list.origin
     cat <<EOF | tee /etc/apt/sources.list
-deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb https://mirrors.aliyun.com/debian/ bullseye main non-free contrib
+deb https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
+deb https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
+deb https://mirrors.aliyun.com/debian-security/ bullseye-security main
 
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/debian/ bullseye main non-free contrib
+deb-src https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
+deb-src https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
+deb-src https://mirrors.aliyun.com/debian-security/ bullseye-security main
 
 EOF
 fi

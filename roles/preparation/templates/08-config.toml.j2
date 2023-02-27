@@ -147,17 +147,17 @@ version = 2
       [plugins."io.containerd.grpc.v1.cri".registry.auths]
 
       [plugins."io.containerd.grpc.v1.cri".registry.configs]
-        [plugins."io.containerd.grpc.v1.cri".registry.configs."harbor-01a.cloudnet.tech".tls]
+        [plugins."io.containerd.grpc.v1.cri".registry.configs."harbor-01a.demo.local".tls]
           insecure_skip_verify = true
-        [plugins."io.containerd.grpc.v1.cri".registry.configs."harbor-01a.cloudnet.tech".auth]
+        [plugins."io.containerd.grpc.v1.cri".registry.configs."harbor-01a.demo.local".auth]
           username = ""
           password = ""
 
       [plugins."io.containerd.grpc.v1.cri".registry.headers]
 
       [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
-        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."harbor-01a.cloudnet.tech"]
-          endpoint = ["https://harbor-01a.cloudnet.tech"]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."harbor-01a.demo.local"]
+          endpoint = ["https://harbor-01a.demo.local"]
 
     [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
       tls_cert_file = ""
