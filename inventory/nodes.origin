@@ -1,0 +1,15 @@
+[master1]
+$master1_IP
+
+[master2]
+$master2_IP
+
+[master3]
+$master3_IP
+
+[master:children]
+master1
+master2
+master3
+
+[worker]
