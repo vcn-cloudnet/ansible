@@ -5,7 +5,10 @@
   template: src=00-swapoff.sh.j2 dest=/tmp/k8s/00-swapoff.sh mode=755
 
 - name: Shutoff swap and disable
-  shell: "sh /tmp/k8s/00-swapoff.sh"
+  shell: 
+    chdir: /tmp/k8s
+    cmd: >
+      sh 00-swapoff.sh
 
 #- name: Remove 00-swapoff.sh
 #  file:
@@ -16,7 +19,10 @@
   template: src=01-sources.list.sh.j2 dest=/tmp/k8s/01-sources.list.sh mode=755
 
 - name: Create /etc/apt/sources.list
-  shell: "sh /tmp/k8s/01-sources.list.sh"
+  shell: 
+    chdir: /tmp/k8s
+    cmd: >
+      sh 01-sources.list.sh
 
 #- name: Remove 01-sources.list.sh
 #  file:
@@ -27,7 +33,10 @@
   template: src=02-basis.packages.sh.j2 dest=/tmp/k8s/02-basis.packages.sh mode=755
 
 - name: Install basis packages
-  shell: "sh /tmp/k8s/02-basis.packages.sh"
+  shell: 
+    chdir: /tmp/k8s
+    cmd: >
+      sh 02-basis.packages.sh
 
 #- name: Remove 02-basis.packages.sh
 #  file:
@@ -38,7 +47,10 @@
   template: src=03-chrony.sh.j2 dest=/tmp/k8s/03-chrony.sh mode=755
 
 - name: Install NTP chrony
-  shell: "sh /tmp/k8s/03-chrony.sh"
+  shell: 
+    chdir: /tmp/k8s
+    cmd: >
+      sh 03-chrony.sh
 
 #- name: Remove 03-chrony.sh
 #  file:
@@ -49,7 +61,10 @@
   template: src=04-modules.sh.j2 dest=/tmp/k8s/04-modules.sh mode=755
 
 - name: Create modules
-  shell: "sh /tmp/k8s/04-modules.sh"
+  shell: 
+    chdir: /tmp/k8s
+    cmd: >
+      sh 04-modules.sh
 
 #- name: Remove 04-modules.sh
 #  file:
@@ -60,7 +75,10 @@
   template: src=05-k8s.sysctl.sh.j2 dest=/tmp/k8s/05-k8s.sysctl.sh mode=755
 
 - name: Create k8s.sysctl
-  shell: "sh /tmp/k8s/05-k8s.sysctl.sh"
+  shell:
+    chdir: /tmp/k8s
+    cmd: >
+      sh 05-k8s.sysctl.sh
 
 #- name: Remove 05-k8s.sysctl.sh
 #  file:
@@ -71,7 +89,10 @@
   template: src=06-containerd.sh.j2 dest=/tmp/k8s/06-containerd.sh mode=755
 
 - name: Add docker repository & install containerd.io
-  shell: "sh /tmp/k8s/06-containerd.sh"
+  shell: 
+    chdir: /tmp/k8s
+    cmd: >
+      sh 06-containerd.sh
 
 #- name: Remove 06-containerd.sh
 #  file:

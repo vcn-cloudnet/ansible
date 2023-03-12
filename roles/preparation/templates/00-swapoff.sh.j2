@@ -1,4 +1,6 @@
 #!/bin/bash
+swapoff -a
+
 while read -r line
 do
     swap=$(echo $line | awk '{print $3}')
